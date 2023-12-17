@@ -1,19 +1,20 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import PopupWithImage from "./PopupWithImage";
+//import api from '../utils/api';
 
 function Main(props) {
   return (
     <main className="content">
       <section className="profile">
-        <img className="profile__image" src="#" alt="Imagen de perfil del retrato de usuario" />
+        <img className="profile__image" src={props.userDataAvatar} alt="Imagen de perfil del retrato de usuario" />
         <div className="profile__photo-overlay">
           <button type="button" className="button button_type_photo" onClick={props.onEditAvatarClick}></button>
         </div>
         <div className="profile__data">
-          <h2 className="profile__username">Username</h2>
+          <h2 className="profile__username">{props.userDataName}</h2>
           <button type="button" className="button button_action_edit" onClick={props.onEditProfileClick}></button>
-          <p className="profile__useremployment"></p>
+          <p className="profile__useremployment">{props.userDataEmployment}</p>
         </div>
         <button type="submit" className="button button_action_add" onClick={props.onAddPlaceClick}></button>
       </section>

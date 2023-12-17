@@ -2,11 +2,15 @@ import React from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
+import api from './utils/api';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
+  const [userName, setUserName] = React.useState('');
+  const [userEmployment, setUserEmployment] = React.useState('');
+  const [userAvatar, setUserAvatar] = React.useState('');
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
@@ -30,6 +34,18 @@ function App() {
     setIsEditProfilePopupOpen(false);
   };
 
+  React.useEffect(() => {
+    api.getUserData()
+    .then(data => {
+      setUserName(data.name);
+      setUserEmployment(data.about);
+      setUserAvatar(data.avatar);
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }, []);
+
   return (
     <div className="body">
       <div className='page'>
@@ -42,6 +58,9 @@ function App() {
         onEditAvatarClick={handleEditAvatarClick}
         onAddPlaceClick={handleAddPlaceClick}
         handlerCloseAllPopups={closeAllPopups}
+        userDataName={userName}
+        userDataEmployment={userEmployment}
+        userDataAvatar={userAvatar}
         />
         <Footer />
       </div>
