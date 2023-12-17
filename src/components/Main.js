@@ -4,6 +4,7 @@ import PopupWithImage from "./PopupWithImage";
 import Card from "./Card";
 
 function Main(props) {
+
   return (
     <main className="content">
       <section className="profile">
@@ -26,6 +27,8 @@ function Main(props) {
           link={card.link}
           likes={card.likes}
           _id={card._id}
+          cardElement={card}
+          onCardClick={props.handleCardClick}
           />
         ))}
       </div>
@@ -72,7 +75,10 @@ function Main(props) {
           <button id="submit-avatar" type="submit" className="button button_action_create">Guardar</button>
         </PopupWithForm>
       </form>
-      <PopupWithImage />
+      <PopupWithImage
+      selectedCardElement={props.selectedCardElement}
+      onClose={props.handlerCloseAllPopups}
+      />
     </main>
   );
 }

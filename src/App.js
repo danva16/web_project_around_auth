@@ -12,6 +12,7 @@ function App() {
   const [userEmployment, setUserEmployment] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
+  const [selectedCard, setSelectedCard] = React.useState(null);
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
@@ -28,11 +29,17 @@ function App() {
     document.querySelector(".overlay").classList.add("overlay_mode_active");
   };
 
+  const handleCardClick = (card) => {
+    setSelectedCard(card);
+    document.querySelector(".overlay").classList.add("overlay_mode_active");
+  }
+
   const closeAllPopups = () => {
     document.querySelector(".overlay").classList.remove("overlay_mode_active");
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditProfilePopupOpen(false);
+    setSelectedCard(null);
   };
 
   React.useEffect(() => {
@@ -68,6 +75,8 @@ function App() {
         userDataEmployment={userEmployment}
         userDataAvatar={userAvatar}
         cards={cards}
+        handleCardClick={handleCardClick}
+        selectedCardElement={selectedCard}
         />
         <Footer />
       </div>
