@@ -11,6 +11,7 @@ function App() {
   const [userName, setUserName] = React.useState('');
   const [userEmployment, setUserEmployment] = React.useState('');
   const [userAvatar, setUserAvatar] = React.useState('');
+  const [cards, setCards] = React.useState([]);
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
@@ -43,6 +44,11 @@ function App() {
     })
     .catch(err => {
       console.log(err);
+    });
+
+    api.getInitialCards()
+    .then(cardsData => {
+      setCards(cardsData);
     })
   }, []);
 
@@ -61,6 +67,7 @@ function App() {
         userDataName={userName}
         userDataEmployment={userEmployment}
         userDataAvatar={userAvatar}
+        cards={cards}
         />
         <Footer />
       </div>

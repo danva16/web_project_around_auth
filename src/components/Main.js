@@ -1,7 +1,7 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
 import PopupWithImage from "./PopupWithImage";
-//import api from '../utils/api';
+import Card from "./Card";
 
 function Main(props) {
   return (
@@ -20,19 +20,14 @@ function Main(props) {
       </section>
 
       <div className="places">
-        <template id="place-template">
-          <div className="place">
-            <img className="place__image" src="#" alt="" />
-            <div className="place__info">
-              <h3 className="place__title">Título</h3>
-              <div className="like-elements">
-                <button type="button" className="button button_action_like"></button>
-                <span className="like-elements__count">0</span>
-              </div>
-            </div>
-            <button type="button" className="button button_action_trash"></button>
-          </div>
-        </template>
+        {props.cards.map((card) => (
+          <Card
+          name={card.name}
+          link={card.link}
+          likes={card.likes}
+          _id={card._id}
+          />
+        ))}
       </div>
 
       <form className="form" noValidate>
