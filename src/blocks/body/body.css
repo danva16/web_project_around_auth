@@ -3,6 +3,7 @@
   font-style: normal;
   margin: 0;
   min-width: 320px;
+  min-height: 1000px;
   position: relative;
   display: flex;
   flex-direction: column;
