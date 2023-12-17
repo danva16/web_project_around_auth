@@ -1,6 +1,6 @@
 import React from "react";
 
-function PopupWithImage(props) {
+function ImagePopup(props) {
   const card = props.selectedCardElement;
 
   return (
@@ -12,4 +12,4 @@ function PopupWithImage(props) {
   )
 }
 
-export default PopupWithImage;
+export default ImagePopup;

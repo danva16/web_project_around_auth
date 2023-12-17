@@ -1,6 +1,6 @@
 import React from "react";
 import PopupWithForm from "./PopupWithForm";
-import PopupWithImage from "./PopupWithImage";
+import ImagePopup from "./ImagePopup";
 import Card from "./Card";
 
 function Main(props) {
@@ -75,7 +75,7 @@ function Main(props) {
           <button id="submit-avatar" type="submit" className="button button_action_create">Guardar</button>
         </PopupWithForm>
       </form>
-      <PopupWithImage
+      <ImagePopup
       selectedCardElement={props.selectedCardElement}
       onClose={props.handlerCloseAllPopups}
       />
