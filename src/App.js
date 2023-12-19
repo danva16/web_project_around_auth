@@ -13,29 +13,30 @@ function App() {
   const [userAvatar, setUserAvatar] = React.useState('');
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
+  const [isOverlayVisible, setIsOverlayVisible] = React.useState(false);
 
   const handleEditProfileClick = () => {
-    setIsEditProfilePopupOpen(!isEditProfilePopupOpen);
-    document.querySelector(".overlay").classList.add("overlay_mode_active");
+    setIsEditProfilePopupOpen(currentValue => !currentValue);
+    setIsOverlayVisible(currentValue => !currentValue);
   };
 
   const handleEditAvatarClick = () => {
-    setIsEditAvatarPopupOpen(!isEditAvatarPopupOpen);
-    document.querySelector(".overlay").classList.add("overlay_mode_active");
+    setIsEditAvatarPopupOpen(currentValue => !currentValue);
+    setIsOverlayVisible(currentValue => !currentValue);
   };
 
   const handleAddPlaceClick = () => {
-    setIsAddPlacePopupOpen(!isAddPlacePopupOpen);
-    document.querySelector(".overlay").classList.add("overlay_mode_active");
+    setIsAddPlacePopupOpen(currentValue => !currentValue);
+    setIsOverlayVisible(currentValue => !currentValue);
   };
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
-    document.querySelector(".overlay").classList.add("overlay_mode_active");
+    setIsOverlayVisible(currentValue => !currentValue);
   }
 
   const closeAllPopups = () => {
-    document.querySelector(".overlay").classList.remove("overlay_mode_active");
+    setIsOverlayVisible(false);
     setIsEditAvatarPopupOpen(false);
     setIsAddPlacePopupOpen(false);
     setIsEditProfilePopupOpen(false);
@@ -80,7 +81,7 @@ function App() {
         />
         <Footer />
       </div>
-      <div className='overlay'></div>
+      <div className={`overlay ${isOverlayVisible && 'overlay_mode_active'}`}></div>
     </div>
   );
 }
