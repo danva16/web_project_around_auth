@@ -6,8 +6,8 @@ function Card(props) {
   }
 
   return (
-    <div key={props._id} className="place" onClick={handleClick}>
-      <img className="place__image" src={props.link} alt={props.name} />
+    <div key={props._id} className="place">
+      <img className="place__image" src={props.link} alt={props.name} onClick={handleClick} />
       <div className="place__info">
         <h3 className="place__title">{props.name}</h3>
         <div className="like-elements">
