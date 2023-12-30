@@ -3,6 +3,7 @@ import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
 import api from './utils/api';
+import CurrentUserContext from './contexts/CurrentUserContext';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -14,6 +15,7 @@ function App() {
   const [cards, setCards] = React.useState([]);
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [isOverlayVisible, setIsOverlayVisible] = React.useState(false);
+  const [currentUser, setCurrentUser] = React.useState(null);
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(currentValue => !currentValue);
@@ -49,6 +51,7 @@ function App() {
       setUserName(data.name);
       setUserEmployment(data.about);
       setUserAvatar(data.avatar);
+      setCurrentUser(data);
     })
     .catch(err => {
       console.log(err);
@@ -61,7 +64,8 @@ function App() {
   }, []);
 
   return (
-    <div className="body">
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="body">
       <div className='page'>
         <Header />
         <Main
@@ -83,6 +87,7 @@ function App() {
       </div>
       <div className={`overlay ${isOverlayVisible && 'overlay_mode_active'}`}></div>
     </div>
+    </CurrentUserContext.Provider>
   );
 }
 
