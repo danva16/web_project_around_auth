@@ -69,22 +69,11 @@ class Api {
     })
   }
 
-  likeCard(cardId) {
-    return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
-      method: "PUT",
-      headers: this.headers
-    })
-    .then(res => {
-      if(res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    })
-  }
+  changeLikeCardStatus(cardId, isLiked) {
+    const method = isLiked ? 'PUT' : 'DELETE';
 
-  unlikeCard(cardId) {
     return fetch(`${this.baseUrl}/cards/likes/${cardId}`, {
-      method: "DELETE",
+      method,
       headers: this.headers
     })
     .then(res => {
