@@ -7,6 +7,7 @@ import api from './utils/api';
 import CurrentUserContext from './contexts/CurrentUserContext';
 import CurrentCardsContext from './contexts/CurrentCardsContext';
 import EditProfilePopup from './components/EditProfilePopup';
+import EditAvatarPopup from './components/EditAvatarPopup';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -44,13 +45,23 @@ function App() {
     api.updateUserInfo(newUserData)
     .then(updatedUser => {
       setCurrentUser(updatedUser);
-      console.log(updatedUser);
       closeAllPopups();
     })
     .catch(err => {
       console.log(err);
     })
-  }
+  };
+
+  const handleUpdateAvatar = (newAvatarData) => {
+    api.updateProfilePhoto(newAvatarData)
+    .then(updatedUser => {
+      setCurrentUser(updatedUser);
+      closeAllPopups();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  };
 
   const closeAllPopups = () => {
     setIsOverlayVisible(false);
@@ -86,9 +97,6 @@ function App() {
         <div className='page'>
           <Header />
           <Main
-            //isEditProfilePopupOpen={isEditProfilePopupOpen}
-            //isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-            //isAddPlacePopupOpen={isAddPlacePopupOpen}
             onEditProfileClick={handleEditProfileClick}
             onEditAvatarClick={handleEditAvatarClick}
             onAddPlaceClick={handleAddPlaceClick}
@@ -100,6 +108,7 @@ function App() {
           <Footer />
           <div className="forms">
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onSubmit={handleUpdateUser} />
+          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onSubmit={handleUpdateAvatar} />
           <PopupWithForm
           title="Nuevo Lugar"
           name="image"
@@ -113,18 +122,6 @@ function App() {
               <span className="form__input-error image-input-error"></span>
             </div>
             <button id="submit-image" type="submit" className="button button_action_create">Crear</button>
-          </PopupWithForm>
-          <PopupWithForm
-          title="Cambiar foto de perfil"
-          name="avatar"
-          isOpen={isEditAvatarPopupOpen}
-          onClose={closeAllPopups}
-          >
-            <div className="form__inputs">
-              <input type="url" placeholder="Inserta imagen" id="avatar-input" name="avatar" className="form__input" required />
-              <span className="form__input-error avatar-input-error"></span>
-            </div>
-            <button id="submit-avatar" type="submit" className="button button_action_create">Guardar</button>
           </PopupWithForm>
           </div>
         </div>
