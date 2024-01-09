@@ -22,7 +22,6 @@ function EditProfilePopup(props) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(currentUser);
 
     props.onSubmit({
       name,

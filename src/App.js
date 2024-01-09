@@ -4,7 +4,6 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 import api from './utils/api';
 import CurrentUserContext from './contexts/CurrentUserContext';
-import CurrentCardsContext from './contexts/CurrentCardsContext';
 import EditProfilePopup from './components/EditProfilePopup';
 import EditAvatarPopup from './components/EditAvatarPopup';
 import AddPlacePopup from './components/AddPlacePopup';
@@ -118,7 +117,6 @@ function App() {
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
-    <CurrentCardsContext.Provider value={setCards}>
       <div className="body">
         <div className='page'>
           <Header />
@@ -142,7 +140,6 @@ function App() {
         </div>
         <div className={`overlay ${isOverlayVisible && 'overlay_mode_active'}`}></div>
       </div>
-    </CurrentCardsContext.Provider>
     </CurrentUserContext.Provider>
   );
 }

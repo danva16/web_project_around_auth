@@ -1,6 +1,5 @@
 import React from "react";
 import CurrentUserContext from "../contexts/CurrentUserContext";
-//import CardsContext from "../contexts/CardsContext";
 
 function Card(props) {
   //subscripciones
