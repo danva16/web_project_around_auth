@@ -1,70 +1,43 @@
-# Getting Started with Create React App
+# Proyecto 12: Alrededor de los Estados Unidos
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Este proyecto es una aplicación web construida con React que permite a los usuarios explorar perfiles de usuario y lugares de interés en los Estados Unidos. La aplicación incluye funcionalidades como la edición del perfil de usuario, la adición de nuevos lugares y la interacción con tarjetas de lugares a través de peticiones al servidor.
 
-## Available Scripts
+## Características
 
-In the project directory, you can run:
+- **Edición de perfil de usuario:** Permite a los usuarios editar su perfil con facilidad. Los cambios se actualizan tanto en la interfaz de usuario como en el servidor.
 
-### `npm start`
+- **Visualización de lugares de interés:** Presenta lugares de interés con títulos e imágenes atractivas. Al hacer clic en una tarjeta, se puede ver una descripción más detallada.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- **Agregar nuevos lugares:** Los usuarios pueden agregar nuevos lugares de interés mediante un formulario interactivo. Los datos se envían al servidor para su almacenamiento.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- **Interacción con tarjetas:** Los usuarios pueden dar "like" a las tarjetas de lugares, y se muestra un contador de likes. También se pueden eliminar tarjetas, y estos cambios se reflejan tanto en la interfaz de usuario como en el servidor.
 
-### `npm test`
+- **Diseño Responsivo:** La página es responsiva y se adapta a diferentes tamaños de pantalla, con soporte para anchos de ventana de 320px a 1280px.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tecnologías utilizadas
 
-### `npm run build`
+- **React:** La biblioteca principal utilizada para construir la interfaz de usuario.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **CSS:** Utilizado para el diseño y la presentación visual.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **JavaScript:** La lógica del proyecto se implementa utilizando clases de JavaScript, diseñadas con un enfoque en el acoplamiento débil. Se realizan peticiones al servidor utilizando fetch para la actualización y obtención de datos.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **Webpack:** Se utiliza para empaquetar, transpilar y optimizar el código.
 
-### `npm run eject`
+- **API y Servidor:** Se realiza comunicación con un servidor que maneja las operaciones CRUD (Crear, Leer, Actualizar, Eliminar) mediante peticiones HTTP.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Uso
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **Editar el perfil de usuario:** Al hacer clic en el botón "Editar", se abre un popup que permite editar el perfil del usuario. Al guardar los cambios, se actualiza la información del usuario tanto en la página como en el servidor.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **Agregar nuevos lugares de interés:** Al hacer clic en el botón "Agregar", se abre un formulario para agregar un nuevo lugar de interés. Los usuarios pueden proporcionar un título y una imagen. Al hacer clic en el botón "Guardar", se crea una nueva tarjeta de lugar de interés y se envían los datos al servidor.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Interactuar con tarjetas:** Al hacer clic en una tarjeta de lugar de interés, se abre un popup con una imagen y una descripción más detallada del lugar. Los usuarios pueden dar "like" a las tarjetas y eliminarlas, y estos cambios se reflejan en tiempo real tanto en la interfaz como en el servidor.
 
-## Learn More
+- **Cerrar popups:** Los popups se pueden cerrar haciendo clic en el botón "Cerrar" o haciendo clic en el área sombreada alrededor del formulario.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- **Visualizar información detallada:** Al hacer clic en una tarjeta de lugar de interés, se abre un popup con una imagen y una descripción más detallada del lugar.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Visita
 
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Puedes ver la página en funcionamiento aquí  [➡️](https://danva16.github.io/web_project_around_react/)
