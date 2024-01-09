@@ -14,18 +14,18 @@ function EditAvatarPopup(props) {
 
   return(
     <PopupWithForm
-          title="Cambiar foto de perfil"
-          name="avatar"
-          isOpen={props.isOpen}
-          onClose={props.onClose}
-          onSubmit={handleSubmit}
-          >
-            <div className="form__inputs">
-              <input type="url" placeholder="Inserta imagen" id="avatar-input" name="avatar" className="form__input" ref={avatarRef} required />
-              <span className="form__input-error avatar-input-error"></span>
-            </div>
-            <button id="submit-avatar" type="submit" className="button button_action_create">Guardar</button>
-          </PopupWithForm>
+    title="Cambiar foto de perfil"
+    name="avatar"
+    isOpen={props.isOpen}
+    onClose={props.onClose}
+    onSubmit={handleSubmit}
+    >
+      <div className="form__inputs">
+        <input type="url" placeholder="Inserta imagen" id="avatar-input" name="avatar" className="form__input" ref={avatarRef} required />
+        <span className="form__input-error avatar-input-error"></span>
+      </div>
+      <button id="submit-avatar" type="submit" className="button button_action_create">Guardar</button>
+    </PopupWithForm>
   )
 }
 

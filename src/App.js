@@ -1,13 +1,13 @@
 import React from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
-import PopupWithForm from './components/PopupWithForm';
 import Footer from './components/Footer';
 import api from './utils/api';
 import CurrentUserContext from './contexts/CurrentUserContext';
 import CurrentCardsContext from './contexts/CurrentCardsContext';
 import EditProfilePopup from './components/EditProfilePopup';
 import EditAvatarPopup from './components/EditAvatarPopup';
+import AddPlacePopup from './components/AddPlacePopup';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -20,25 +20,40 @@ function App() {
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(currentValue => !currentValue);
-    console.log("Profile");
     setIsOverlayVisible(currentValue => !currentValue);
   };
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(currentValue => !currentValue);
-    console.log("Avatar");
     setIsOverlayVisible(currentValue => !currentValue);
   };
 
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(currentValue => !currentValue);
-    console.log("Place");
     setIsOverlayVisible(currentValue => !currentValue);
   };
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
     setIsOverlayVisible(currentValue => !currentValue);
+  };
+
+  const handleCardLike = (card) => {
+    const isliked = card.likes.some(i => i._id === currentUser._id);
+
+    api.changeLikeCardStatus(card._id, !isliked)
+    .then(newCard => {
+      setCards(state => state.map(c => c._id === card._id ? newCard : c));
+    })
+    .catch(err => console.log(err));
+  };
+
+  const handleCardDelete = (card) => {
+    api.deleteCard(card._id)
+    .then(() => {
+      setCards(state => state.filter(c => c._id !== card._id));
+    })
+    .catch(err => console.log(err));
   };
 
   const handleUpdateUser = (newUserData) => {
@@ -51,6 +66,17 @@ function App() {
       console.log(err);
     })
   };
+
+  const handleAddPlaceSubmit = (newCardData) => {
+    api.addCard(newCardData)
+    .then((newCard) => {
+      setCards([newCard, ...cards]);
+      closeAllPopups();
+    })
+    .catch(err => {
+      console.log(err);
+    })
+  }
 
   const handleUpdateAvatar = (newAvatarData) => {
     api.updateProfilePhoto(newAvatarData)
@@ -102,27 +128,16 @@ function App() {
             onAddPlaceClick={handleAddPlaceClick}
             handlerCloseAllPopups={closeAllPopups}
             cards={cards}
-            handleCardClick={handleCardClick}
+            onCardClick={handleCardClick}
+            onCardLike={handleCardLike}
+            onCardDelete={handleCardDelete}
             selectedCardElement={selectedCard}
           />
           <Footer />
           <div className="forms">
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onSubmit={handleUpdateUser} />
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onSubmit={handleUpdateAvatar} />
-          <PopupWithForm
-          title="Nuevo Lugar"
-          name="image"
-          isOpen={isAddPlacePopupOpen}
-          onClose={closeAllPopups}
-          >
-            <div className="form__inputs">
-              <input type="text" placeholder="Título" id="title-input" name="name" className="form__input" minlength="2" maxlength="30" required />
-              <span className="form__input-error title-input-error"></span>
-              <input type="url" placeholder="Enlace a la imagen" id="image-input" name="link" className="form__input" required />
-              <span className="form__input-error image-input-error"></span>
-            </div>
-            <button id="submit-image" type="submit" className="button button_action_create">Crear</button>
-          </PopupWithForm>
+          <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onSubmit={handleAddPlaceSubmit} />
           </div>
         </div>
         <div className={`overlay ${isOverlayVisible && 'overlay_mode_active'}`}></div>
