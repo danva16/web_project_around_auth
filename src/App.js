@@ -1,10 +1,12 @@
 import React from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
+import PopupWithForm from './components/PopupWithForm';
 import Footer from './components/Footer';
 import api from './utils/api';
 import CurrentUserContext from './contexts/CurrentUserContext';
 import CurrentCardsContext from './contexts/CurrentCardsContext';
+import EditProfilePopup from './components/EditProfilePopup';
 
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
@@ -17,22 +19,37 @@ function App() {
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(currentValue => !currentValue);
+    console.log("Profile");
     setIsOverlayVisible(currentValue => !currentValue);
   };
 
   const handleEditAvatarClick = () => {
     setIsEditAvatarPopupOpen(currentValue => !currentValue);
+    console.log("Avatar");
     setIsOverlayVisible(currentValue => !currentValue);
   };
 
   const handleAddPlaceClick = () => {
     setIsAddPlacePopupOpen(currentValue => !currentValue);
+    console.log("Place");
     setIsOverlayVisible(currentValue => !currentValue);
   };
 
   const handleCardClick = (card) => {
     setSelectedCard(card);
     setIsOverlayVisible(currentValue => !currentValue);
+  };
+
+  const handleUpdateUser = (newUserData) => {
+    api.updateUserInfo(newUserData)
+    .then(updatedUser => {
+      setCurrentUser(updatedUser);
+      console.log(updatedUser);
+      closeAllPopups();
+    })
+    .catch(err => {
+      console.log(err);
+    })
   }
 
   const closeAllPopups = () => {
@@ -57,6 +74,9 @@ function App() {
     .then(cardsData => {
       setCards(cardsData);
     })
+    .catch(err => {
+      console.log(err);
+    })
   }, []);
 
   return (
@@ -65,10 +85,10 @@ function App() {
       <div className="body">
         <div className='page'>
           <Header />
-            <Main
-            isEditProfilePopupOpen={isEditProfilePopupOpen}
-            isEditAvatarPopupOpen={isEditAvatarPopupOpen}
-            isAddPlacePopupOpen={isAddPlacePopupOpen}
+          <Main
+            //isEditProfilePopupOpen={isEditProfilePopupOpen}
+            //isEditAvatarPopupOpen={isEditAvatarPopupOpen}
+            //isAddPlacePopupOpen={isAddPlacePopupOpen}
             onEditProfileClick={handleEditProfileClick}
             onEditAvatarClick={handleEditAvatarClick}
             onAddPlaceClick={handleAddPlaceClick}
@@ -76,8 +96,37 @@ function App() {
             cards={cards}
             handleCardClick={handleCardClick}
             selectedCardElement={selectedCard}
-            />
+          />
           <Footer />
+          <div className="forms">
+          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onSubmit={handleUpdateUser} />
+          <PopupWithForm
+          title="Nuevo Lugar"
+          name="image"
+          isOpen={isAddPlacePopupOpen}
+          onClose={closeAllPopups}
+          >
+            <div className="form__inputs">
+              <input type="text" placeholder="Título" id="title-input" name="name" className="form__input" minlength="2" maxlength="30" required />
+              <span className="form__input-error title-input-error"></span>
+              <input type="url" placeholder="Enlace a la imagen" id="image-input" name="link" className="form__input" required />
+              <span className="form__input-error image-input-error"></span>
+            </div>
+            <button id="submit-image" type="submit" className="button button_action_create">Crear</button>
+          </PopupWithForm>
+          <PopupWithForm
+          title="Cambiar foto de perfil"
+          name="avatar"
+          isOpen={isEditAvatarPopupOpen}
+          onClose={closeAllPopups}
+          >
+            <div className="form__inputs">
+              <input type="url" placeholder="Inserta imagen" id="avatar-input" name="avatar" className="form__input" required />
+              <span className="form__input-error avatar-input-error"></span>
+            </div>
+            <button id="submit-avatar" type="submit" className="button button_action_create">Guardar</button>
+          </PopupWithForm>
+          </div>
         </div>
         <div className={`overlay ${isOverlayVisible && 'overlay_mode_active'}`}></div>
       </div>

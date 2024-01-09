@@ -2,11 +2,11 @@ import React from "react";
 
 function PopupWithForm(props) {
   return (
-    <fieldset id={props.name} className={`form__set form__set_type_${props.name} ${props.isOpen && 'form__set_mode_active'}`}>
+    <form id={props.name} className={`form form_type_${props.name} ${props.isOpen && 'form_mode_active'}`} onSubmit={props.onSubmit} noValidate>
       <button type="button" className="button button_action_close" onClick={props.onClose}></button>
       <h2 className="form__title">{props.title}</h2>
       {props.children}
-    </fieldset>
+    </form>
   );
 }
 
