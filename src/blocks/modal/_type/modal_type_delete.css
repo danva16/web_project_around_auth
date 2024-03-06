@@ -1,0 +1,7 @@
+.modal_type_delete {
+  width: 470px;
+  height: 228px;
+  display: flex;
+  visibility: visible;
+  opacity: 1;
+}
