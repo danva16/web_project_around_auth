@@ -10,6 +10,10 @@ export const register = (email, password) => {
     body: JSON.stringify({ email, password }),
   })
   .then((response) => {
+    if (!response.ok) {
+      return response.status(400).send({ message: 'uno de los campos se rellenó de forma incorrecta' })
+    }
+
     return response.json();
   })
   .then((res) => {
@@ -28,11 +32,15 @@ export const authorize = (email, password) => {
     body: JSON.stringify({ email, password }),
   })
   .then((response) => {
+    if (!response.ok) {
+      return response.status(400).send({ message: 'no se ha proporcionado uno o más campos' })
+    }
+
     return response.json();
   })
   .then((data) => {
     if (data.token) {
-      localStorage.setItem('jwt', data.jwt);
+      localStorage.setItem('jwt', data.token);
       return data;
     }
     return;
