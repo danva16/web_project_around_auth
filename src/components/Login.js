@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, withRouter, useHistory } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import * as auth from '../utils/auth';
 import headerLogo from '../images/header__logo.svg';
 
@@ -35,7 +35,6 @@ const Login = ({ handleLogin }) => {
         });
 
         handleLogin(evt);
-        history.push('/protected');
       }
     })
     .catch((err) => console.log(err))

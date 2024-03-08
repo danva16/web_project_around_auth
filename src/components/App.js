@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, Switch, Redirect } from 'react-router-dom';
+import { Link, Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -9,6 +9,11 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 
+import ProtectedRoute from './ProtectedRoute';
+import Login from './Login';
+import Register from './Register';
+import * as auth from '../utils/auth';
+
 function App() {
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isEditAvatarPopupOpen, setIsEditAvatarPopupOpen] = React.useState(false);
@@ -17,6 +22,8 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState(null);
   const [isOverlayVisible, setIsOverlayVisible] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState('');
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const history = useHistory();
 
   const handleEditProfileClick = () => {
     setIsEditProfilePopupOpen(currentValue => !currentValue);
@@ -116,33 +123,74 @@ function App() {
     })
   }, []);
 
+  const tokenCheck = () => {
+    const jwt = localStorage.getItem('jwt');
+
+    if (jwt) {
+      auth.checkToken(jwt)
+      .then((res) => {
+        if (res) {
+          setLoggedIn(true);
+          history.push('/protected');
+        }
+      })
+      .catch(err => console.log(err));
+    }
+
+    return;
+  };
+
+  const handleLogin = (evt) => {
+    evt.preventDefault();
+    tokenCheck();
+  };
+
   return (
-    <CurrentUserContext.Provider value={currentUser}>
-      <div className="body">
-        <div className='page'>
-          <Header />
-          <Main
-            onEditProfileClick={handleEditProfileClick}
-            onEditAvatarClick={handleEditAvatarClick}
-            onAddPlaceClick={handleAddPlaceClick}
-            handlerCloseAllPopups={closeAllPopups}
-            cards={cards}
-            onCardClick={handleCardClick}
-            onCardLike={handleCardLike}
-            onCardDelete={handleCardDelete}
-            selectedCardElement={selectedCard}
-          />
-          <Footer />
-          <div className="forms">
-          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onSubmit={handleUpdateUser} />
-          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onSubmit={handleUpdateAvatar} />
-          <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onSubmit={handleAddPlaceSubmit} />
+    <>
+    <Switch>
+      <ProtectedRoute path='/protected' loggedIn={loggedIn}>
+        <CurrentUserContext.Provider value={currentUser}>
+        <div className="body">
+          <div className='page'>
+            <Header />
+            <Main
+              onEditProfileClick={handleEditProfileClick}
+              onEditAvatarClick={handleEditAvatarClick}
+              onAddPlaceClick={handleAddPlaceClick}
+              handlerCloseAllPopups={closeAllPopups}
+              cards={cards}
+              onCardClick={handleCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
+              selectedCardElement={selectedCard}
+            />
+            <Footer />
+            <div className="forms">
+              <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onSubmit={handleUpdateUser} />
+              <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onSubmit={handleUpdateAvatar} />
+              <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onSubmit={handleAddPlaceSubmit} />
+            </div>
           </div>
+          <div className={`overlay ${isOverlayVisible && 'overlay_mode_active'}`}></div>
         </div>
-        <div className={`overlay ${isOverlayVisible && 'overlay_mode_active'}`}></div>
-      </div>
-    </CurrentUserContext.Provider>
+        </CurrentUserContext.Provider>
+      </ProtectedRoute>
+
+      <Route path='/login'>
+        <Login handleLogin={handleLogin} />
+      </Route>
+
+      <Route path='/register'>
+        <Register />
+      </Route>
+
+      <Route>
+        {loggedIn ? <Redirect to='/protected' /> : <Redirect to='/login' />}
+      </Route>
+
+    </Switch>
+    </>
   );
-}
+};
 
 export default App;
