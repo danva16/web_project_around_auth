@@ -45,7 +45,7 @@ const Login = ({ handleLogin }) => {
     <div className="login-page">
       <section className="login-header">
           <img src={headerLogo} alt="Logotipo Around US" className="login-header__image" />
-          <Link to="/" className="login-header__link">Regístrate</Link>
+          <Link to="/register" className="login-header__link">Regístrate</Link>
       </section>
 
       <section className="login-info">
@@ -74,7 +74,7 @@ const Login = ({ handleLogin }) => {
 
           <div className="login-submit">
             <button className="button button_action_create">Inicia sesión</button>
-            <Link to="/registrer" className="login-submit__link">
+            <Link to="/register" className="login-submit__link">
               ¿Aún no eres miembro? Registrate aquí
             </Link>
           </div>
