@@ -1,4 +1,4 @@
-# Proyecto 12: Alrededor de los Estados Unidos
+# Proyecto 15: Alrededor de los Estados Unidos
 
 Este proyecto es una aplicación web construida con React que permite a los usuarios explorar perfiles de usuario y lugares de interés en los Estados Unidos. La aplicación incluye funcionalidades como la edición del perfil de usuario, la adición de nuevos lugares y la interacción con tarjetas de lugares a través de peticiones al servidor.
 
@@ -37,6 +37,28 @@ Este proyecto es una aplicación web construida con React que permite a los usua
 - **Cerrar popups:** Los popups se pueden cerrar haciendo clic en el botón "Cerrar" o haciendo clic en el área sombreada alrededor del formulario.
 
 - **Visualizar información detallada:** Al hacer clic en una tarjeta de lugar de interés, se abre un popup con una imagen y una descripción más detallada del lugar.
+
+- **Registro y Autorización:** Los usuarios ahora pueden registrarse y autorizarse en la aplicación para acceder a funcionalidades adicionales.
+
+## Registro y Autorización
+
+### Crear rutas y direccionar
+Toda la funcionalidad de tu aplicación estará disponible únicamente para usuarios autorizados a través de la ruta raíz /. Se han implementado dos nuevas rutas para usuarios no autorizados en un archivo auth.js:
+
+- **/signup:** para el registro de usuarios.
+- **/signin:** para la autorización de usuarios.
+Si un usuario no autorizado visita la aplicación, será redirigido a la página de inicio de sesión, independientemente de la ruta desde la que accedió.
+
+### Crear nuevos componentes de React
+Se han creado nuevos componentes para manejar la autenticación:
+
+- **Login:** el componente para la autorización de usuarios con las variables de estado necesarias.
+- **Register:** el componente para el registro de usuarios con las variables de estado necesarias.
+- **ProtectedRoute:** un componente para proteger la ruta / de modo que los usuarios no autorizados no puedan acceder a ella.
+- **InfoTooltip:** un componente de ventana modal que informa al usuario si se ha registrado exitosamente.
+
+### Implementar el almacenamiento local y la manipulación de tokens
+Se ha implementado localStorage para almacenar y acceder al token cuando los usuarios visitan el sitio repetidamente. La validez del token se comprueba al enviar una solicitud al endpoint /users/me.
 
 ## Visita
 
