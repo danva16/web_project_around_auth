@@ -1,4 +1,5 @@
 .modal {
+  background-color: #ffffff;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -10,8 +11,8 @@
   flex-direction: column;
   align-items: center;
   border-radius: 10px;
-  width: 470px;
-  height: 390px;
+  width: 450px;
+  height: 350px;
   padding: 35px;
   transition: opacity 1.5s ease, visibility 1.5s ease;
 }
