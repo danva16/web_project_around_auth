@@ -95,6 +95,24 @@ function Register() {
           </div>
         </form>
       </section>
+
+      {succesToolTipIsOpened && (
+        <InfoToolTip
+          isOpen={true}
+          image={succesImage}
+          text="¡Correcto! Ya estás registrado."
+          onClose={handleToolTipClose}
+        />
+      )}
+
+      {failureToolTipIsOpened && (
+        <InfoToolTip
+          isOpen={true}
+          image={failImage}
+          text="Uy, algo salió mal, Por favor, inténtalo de nuevo"
+          onClose={handleToolTipClose}
+        />
+      )}
     </div>
   );
 };
