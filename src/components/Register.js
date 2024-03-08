@@ -98,3 +98,5 @@ function Register() {
     </div>
   );
 };
+
+export default withRouter(Register);
