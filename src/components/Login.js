@@ -1,13 +1,14 @@
 import React from "react";
-import { Link, withRouter } from 'react-router-dom';
-import * as auth from '../utils/auth';
+import { Link, withRouter, useHistory } from 'react-router-dom';
+import * as auth from '../utils/Auth';
 import headerLogo from '../images/header__logo.svg';
 
-const Login = ({ history, handleLogin }) => {
+const Login = ({ handleLogin }) => {
   const [formData, setFormData] = React.useState({
     email: "",
     password: "",
   });
+  const history = useHistory();
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
