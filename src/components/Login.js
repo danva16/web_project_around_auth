@@ -43,10 +43,8 @@ const Login = ({ history, handleLogin }) => {
   return (
     <div className="login-page">
       <section className="login-header">
-        <div className="login-header__container">
           <img src={headerLogo} alt="Logotipo Around US" className="login-header__image" />
           <Link to="/" className="login-header__link">Regístrate</Link>
-        </div>
       </section>
 
       <section className="login-info">
@@ -82,6 +80,7 @@ const Login = ({ history, handleLogin }) => {
         </form>
       </section>
     </div>
-  )
+  );
+};
 
-}
+export default withRouter(Login);

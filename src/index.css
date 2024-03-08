@@ -52,6 +52,16 @@
 @import url('./blocks/form/__input-error/form__input-error.css');
 @import url('./blocks/form/__input-error/_active/form__input-error_active.css');
 @import url('./blocks/form/__title/form__title.css');
+@import url('./blocks/login-page/login-page.css');
+@import url('./blocks/login-header/login-header.css');
+@import url('./blocks/login-header/__image/login-header__image.css');
+@import url('./blocks/login-header/__link/login-header__link.css');
+@import url('./blocks/login-info/login-info.css');
+@import url('./blocks/login-info/__title/login-info__title.css');
+@import url('./blocks/login-info/__form/login-info__form.css');
+@import url('./blocks/login-info/__input/login-info__input.css');
+@import url('./blocks/login-submit/login-submit.css');
+@import url('./blocks/login-submit/__link/login-submit__link.css');
 @import url('./blocks/modal/modal.css');
 @import url('./blocks/modal/_type/modal_type_opened.css');
 @import url('./blocks/modal/__container/modal__container.css');
