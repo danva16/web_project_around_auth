@@ -8,7 +8,6 @@ const Login = ({ handleLogin }) => {
     email: "",
     password: "",
   });
-  const history = useHistory();
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;

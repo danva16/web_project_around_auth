@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Route, Switch, Redirect, useHistory } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect, useHistory } from 'react-router-dom';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
@@ -146,7 +146,7 @@ function App() {
   };
 
   return (
-    <>
+    <BrowserRouter>
     <Switch>
       <ProtectedRoute path='/protected' loggedIn={loggedIn}>
         <CurrentUserContext.Provider value={currentUser}>
@@ -189,7 +189,7 @@ function App() {
       </Route>
 
     </Switch>
-    </>
+    </BrowserRouter>
   );
 };
 

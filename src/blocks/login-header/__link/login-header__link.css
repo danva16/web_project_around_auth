@@ -1,5 +1,5 @@
 .login-header__link {
-  width: 52px;
+  width: fit-content;
   height: 22px;
   font-size: 1.125rem;
   color: #fff;
