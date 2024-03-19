@@ -27,7 +27,7 @@ const Login = ({ handleLogin }) => {
 
     auth.authorize(email, password)
     .then((data) => {
-      if (data.jwt) {
+      if (data.token) {
         setFormData({
           email: "",
           password: "",
